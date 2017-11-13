@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements
          * Use this setting to improve performance if you know that changes in content do not
          * change the child layout size in the RecyclerView
          */
-        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setHasFixedSize(true);
 
         /*
          * The ForecastAdapter is responsible for linking our weather data with the Views that
