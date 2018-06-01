@@ -15,17 +15,17 @@
  */
 package com.example.android.sunshine.ui.detail;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.android.sunshine.R;
 import com.example.android.sunshine.data.database.WeatherEntry;
-import com.example.android.sunshine.databinding.ActivityDetailBinding;
 import com.example.android.sunshine.utilities.SunshineDateUtils;
 import com.example.android.sunshine.utilities.SunshineWeatherUtils;
 
 import java.util.Date;
+
+//import com.example.android.sunshine.databinding.ActivityDetailBinding;
 
 /**
  * Displays single day's forecast
@@ -41,13 +41,13 @@ public class DetailActivity extends AppCompatActivity {
      * in onCreate of this class. Then, we can access all of the Views in our layout
      * programmatically without cluttering up the code with findViewById.
      */
-    private ActivityDetailBinding mDetailBinding;
+//    private ActivityDetailBinding mDetailBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
+//        mDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
         long timestamp = getIntent().getLongExtra(WEATHER_ID_EXTRA, -1);
         Date date = new Date(timestamp);
 
@@ -62,7 +62,7 @@ public class DetailActivity extends AppCompatActivity {
         int weatherImageId = SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId);
 
         /* Set the resource ID on the icon to display the art */
-        mDetailBinding.primaryInfo.weatherIcon.setImageResource(weatherImageId);
+//        mDetailBinding.primaryInfo.weatherIcon.setImageResource(weatherImageId);
 
         /****************
          * Weather Date *
@@ -77,7 +77,7 @@ public class DetailActivity extends AppCompatActivity {
          */
         long localDateMidnightGmt = weatherEntry.getDate().getTime();
         String dateText = SunshineDateUtils.getFriendlyDateString(DetailActivity.this, localDateMidnightGmt, true);
-        mDetailBinding.primaryInfo.date.setText(dateText);
+//        mDetailBinding.primaryInfo.date.setText(dateText);
 
         /***********************
          * Weather Description *
@@ -89,11 +89,11 @@ public class DetailActivity extends AppCompatActivity {
         String descriptionA11y = getString(R.string.a11y_forecast, description);
 
         /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.primaryInfo.weatherDescription.setText(description);
-        mDetailBinding.primaryInfo.weatherDescription.setContentDescription(descriptionA11y);
-
-        /* Set the content description on the weather image (for accessibility purposes) */
-        mDetailBinding.primaryInfo.weatherIcon.setContentDescription(descriptionA11y);
+//        mDetailBinding.primaryInfo.weatherDescription.setText(description);
+//        mDetailBinding.primaryInfo.weatherDescription.setContentDescription(descriptionA11y);
+//
+//        /* Set the content description on the weather image (for accessibility purposes) */
+//        mDetailBinding.primaryInfo.weatherIcon.setContentDescription(descriptionA11y);
 
         /**************************
          * High (max) temperature *
@@ -112,8 +112,8 @@ public class DetailActivity extends AppCompatActivity {
         String highA11y = getString(R.string.a11y_high_temp, highString);
 
         /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.primaryInfo.highTemperature.setText(highString);
-        mDetailBinding.primaryInfo.highTemperature.setContentDescription(highA11y);
+//        mDetailBinding.primaryInfo.highTemperature.setText(highString);
+//        mDetailBinding.primaryInfo.highTemperature.setContentDescription(highA11y);
 
         /*************************
          * Low (min) temperature *
@@ -130,8 +130,8 @@ public class DetailActivity extends AppCompatActivity {
         String lowA11y = getString(R.string.a11y_low_temp, lowString);
 
         /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.primaryInfo.lowTemperature.setText(lowString);
-        mDetailBinding.primaryInfo.lowTemperature.setContentDescription(lowA11y);
+//        mDetailBinding.primaryInfo.lowTemperature.setText(lowString);
+//        mDetailBinding.primaryInfo.lowTemperature.setContentDescription(lowA11y);
 
         /************
          * Humidity *
@@ -142,10 +142,10 @@ public class DetailActivity extends AppCompatActivity {
         String humidityA11y = getString(R.string.a11y_humidity, humidityString);
 
         /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.extraDetails.humidity.setText(humidityString);
-        mDetailBinding.extraDetails.humidity.setContentDescription(humidityA11y);
-
-        mDetailBinding.extraDetails.humidityLabel.setContentDescription(humidityA11y);
+//        mDetailBinding.extraDetails.humidity.setText(humidityString);
+//        mDetailBinding.extraDetails.humidity.setContentDescription(humidityA11y);
+//
+//        mDetailBinding.extraDetails.humidityLabel.setContentDescription(humidityA11y);
 
         /****************************
          * Wind speed and direction *
@@ -157,9 +157,9 @@ public class DetailActivity extends AppCompatActivity {
         String windA11y = getString(R.string.a11y_wind, windString);
 
         /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.extraDetails.windMeasurement.setText(windString);
-        mDetailBinding.extraDetails.windMeasurement.setContentDescription(windA11y);
-        mDetailBinding.extraDetails.windLabel.setContentDescription(windA11y);
+//        mDetailBinding.extraDetails.windMeasurement.setText(windString);
+//        mDetailBinding.extraDetails.windMeasurement.setContentDescription(windA11y);
+//        mDetailBinding.extraDetails.windLabel.setContentDescription(windA11y);
 
         /************
          * Pressure *
@@ -178,8 +178,8 @@ public class DetailActivity extends AppCompatActivity {
         String pressureA11y = getString(R.string.a11y_pressure, pressureString);
 
         /* Set the text and content description (for accessibility purposes) */
-        mDetailBinding.extraDetails.pressure.setText(pressureString);
-        mDetailBinding.extraDetails.pressure.setContentDescription(pressureA11y);
-        mDetailBinding.extraDetails.pressureLabel.setContentDescription(pressureA11y);
+//        mDetailBinding.extraDetails.pressure.setText(pressureString);
+//        mDetailBinding.extraDetails.pressure.setContentDescription(pressureA11y);
+//        mDetailBinding.extraDetails.pressureLabel.setContentDescription(pressureA11y);
     }
 }
