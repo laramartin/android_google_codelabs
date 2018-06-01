@@ -16,10 +16,18 @@
 
 package com.example.android.sunshine.data.database;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.Date;
 
+// The date field is unique because we're only storing the weather for one location,
+// so there should never be two different weather forecasts for a given day
+@Entity(tableName = "weather", indices = {@Index(value = {"date"}, unique = true)})
 public class WeatherEntry {
 
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private int weatherIconId;
     private Date date;
