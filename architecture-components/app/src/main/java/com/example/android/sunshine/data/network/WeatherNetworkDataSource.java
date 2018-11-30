@@ -15,18 +15,14 @@
  */
 package com.example.android.sunshine.data.network;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
 import com.example.android.sunshine.AppExecutors;
-import com.firebase.jobdispatcher.Constraint;
-import com.firebase.jobdispatcher.Driver;
-import com.firebase.jobdispatcher.FirebaseJobDispatcher;
-import com.firebase.jobdispatcher.GooglePlayDriver;
-import com.firebase.jobdispatcher.Job;
-import com.firebase.jobdispatcher.Lifetime;
-import com.firebase.jobdispatcher.Trigger;
+import com.example.android.sunshine.data.database.WeatherEntry;
+import com.firebase.jobdispatcher.*;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -53,9 +49,17 @@ public class WeatherNetworkDataSource {
 
     private final AppExecutors mExecutors;
 
+    // LiveData storing the latest downloaded weather forecasts
+    private final MutableLiveData<WeatherEntry[]> mDownloadedWeatherForecasts;
+
     private WeatherNetworkDataSource(Context context, AppExecutors executors) {
         mContext = context;
         mExecutors = executors;
+        mDownloadedWeatherForecasts = new MutableLiveData<WeatherEntry[]>();
+    }
+
+    public LiveData<WeatherEntry[]> getCurrentWeatherForecasts() {
+        return mDownloadedWeatherForecasts;
     }
 
     /**
@@ -165,8 +169,7 @@ public class WeatherNetworkDataSource {
                             response.getWeatherForecast()[0].getMin(),
                             response.getWeatherForecast()[0].getMax()));
 
-                    // TODO Finish this method when instructed.
-                    // Will eventually do something with the downloaded data
+                    mDownloadedWeatherForecasts.postValue(response.getWeatherForecast());
                 }
             } catch (Exception e) {
                 // Server probably invalid
