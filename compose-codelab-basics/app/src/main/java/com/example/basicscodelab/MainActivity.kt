@@ -3,6 +3,9 @@ package com.example.basicscodelab
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -17,6 +20,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.basicscodelab.ui.theme.BasicsCodelabTheme
+import androidx.compose.runtime.getValue
+
+import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,10 +45,18 @@ fun MyApp(content: @Composable () -> Unit) {
 }
 
 @Composable
-private fun Greeting(name: String) {
-  Surface(color = Color.Cyan) {
-    Text(text = "Hello $name!", modifier = Modifier.padding(32.dp))
-  }
+fun Greeting(name: String) {
+  var isSelected by remember { mutableStateOf(false) }
+  val backgroundColor by animateColorAsState(if (isSelected) Color.Red else Color.Transparent)
+
+  Text(
+    text = "Hello $name!",
+    modifier = Modifier
+      .padding(24.dp)
+      .background(color = backgroundColor)
+      .clickable(onClick = { isSelected = !isSelected }),
+    style = MaterialTheme.typography.body2.copy(color = Color.DarkGray)
+  )
 }
 
 @Preview(showBackground = true)
@@ -50,6 +64,7 @@ private fun Greeting(name: String) {
 fun DefaultPreview() {
   BasicsCodelabTheme {
     Greeting("Android")
+    Greeting("IOS")
   }
 }
 
